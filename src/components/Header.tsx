@@ -1,21 +1,23 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 
 const navLinks = [
-  { to: "/" as const, label: "Home" },
-  { to: "/services" as const, label: "Services" },
-  { to: "/works" as const, label: "Works" },
-  { to: "/about" as const, label: "About" },
-  { to: "/reviews" as const, label: "Reviews" },
-  { to: "/faq" as const, label: "FAQ" },
-  { to: "/contact" as const, label: "Contact" },
+  { to: "/" as const, key: "nav.home" as const },
+  { to: "/services" as const, key: "nav.services" as const },
+  { to: "/works" as const, key: "nav.works" as const },
+  { to: "/about" as const, key: "nav.about" as const },
+  { to: "/reviews" as const, key: "nav.reviews" as const },
+  { to: "/faq" as const, key: "nav.faq" as const },
+  { to: "/contact" as const, key: "nav.contact" as const },
 ];
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { lang, setLang, t } = useLanguage();
 
   return (
     <motion.header
@@ -30,37 +32,61 @@ export function Header() {
             className="text-xl font-bold font-display text-gold-gradient"
             whileHover={{ scale: 1.05 }}
           >
-            Kerala Shed Works
+            Anand Constructions
           </motion.span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="relative px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-primary" }}
-              activeOptions={{ exact: link.to === "/" }}
-            >
-              {link.label}
-              {location.pathname === link.to && (
-                <motion.div
-                  layoutId="nav-underline"
-                  className="absolute bottom-0 left-3 right-3 h-0.5 bg-primary rounded-full"
-                />
-              )}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden md:flex items-center gap-1">
+          <nav className="flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="relative px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                activeProps={{ className: "text-primary" }}
+                activeOptions={{ exact: link.to === "/" }}
+              >
+                {t(link.key)}
+                {location.pathname === link.to && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute bottom-0 left-3 right-3 h-0.5 bg-primary rounded-full"
+                  />
+                )}
+              </Link>
+            ))}
+          </nav>
 
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 text-foreground"
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          {/* Language Toggle */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setLang(lang === "en" ? "ta" : "en")}
+            className="ml-3 flex items-center gap-1.5 rounded-full bg-secondary/80 px-3 py-1.5 text-xs font-semibold text-foreground border border-border/50 hover:bg-secondary transition-colors"
+          >
+            <Globe size={14} className="text-primary" />
+            {lang === "en" ? "தமிழ்" : "EN"}
+          </motion.button>
+        </div>
+
+        <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile language toggle */}
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setLang(lang === "en" ? "ta" : "en")}
+            className="flex items-center gap-1 rounded-full bg-secondary/80 px-2.5 py-1.5 text-xs font-semibold text-foreground border border-border/50"
+          >
+            <Globe size={12} className="text-primary" />
+            {lang === "en" ? "தமிழ்" : "EN"}
+          </motion.button>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="p-2 text-foreground"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       <AnimatePresence>
@@ -86,7 +112,7 @@ export function Header() {
                     activeOptions={{ exact: link.to === "/" }}
                     onClick={() => setMobileOpen(false)}
                   >
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </motion.div>
               ))}
