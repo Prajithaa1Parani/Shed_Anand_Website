@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { LanguageProvider } from "@/lib/i18n";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -22,10 +23,10 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Kerala Shed Works — Premium Shed Construction in Kerala" },
-      { name: "description", content: "Professional shed construction services across Kerala. Residential, commercial, and custom steel shed designs with 15+ years of experience." },
-      { property: "og:title", content: "Kerala Shed Works — Premium Shed Construction" },
-      { property: "og:description", content: "Professional shed construction services across Kerala with 15+ years of experience." },
+      { title: "Anand Constructions — Premium Shed Construction in Tamil Nadu" },
+      { name: "description", content: "Professional shed construction services across Tamil Nadu. Residential, commercial, and custom steel shed designs with 10+ years of experience." },
+      { property: "og:title", content: "Anand Constructions — Premium Shed Construction" },
+      { property: "og:description", content: "Professional shed construction services across Tamil Nadu with 10+ years of experience." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -55,12 +56,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <>
+    <LanguageProvider>
       <Header />
       <main className="pt-16">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </LanguageProvider>
   );
 }

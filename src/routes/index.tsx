@@ -3,6 +3,7 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 import { ArrowRight, Star } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 import heroImg from "@/assets/hero-shed.jpg";
 import residentialImg from "@/assets/residential-shed.jpg";
 import commercialImg from "@/assets/commercial-shed.jpg";
@@ -11,8 +12,8 @@ import customImg from "@/assets/custom-shed.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Kerala Shed Works — Premium Shed Construction in Kerala" },
-      { name: "description", content: "Professional shed construction services across Kerala. 15+ years, 500+ projects, 100% satisfaction." },
+      { title: "Anand Constructions — Premium Shed Construction in Tamil Nadu" },
+      { name: "description", content: "Professional shed construction services across Tamil Nadu. 10+ years, 100+ projects, 100% satisfaction." },
     ],
   }),
   component: HomePage,
@@ -48,34 +49,36 @@ function Counter({ target, label }: { target: number; label: string }) {
   );
 }
 
-const heroWords = "Building Kerala's Finest Sheds".split(" ");
-
-const featuredWorks = [
-  { img: residentialImg, title: "Residential Villa Shed", location: "Thrissur, Kerala" },
-  { img: commercialImg, title: "Industrial Warehouse", location: "Ernakulam, Kerala" },
-  { img: customImg, title: "Custom Modern Design", location: "Kozhikode, Kerala" },
-];
-
-const testimonials = [
-  { name: "Rajesh Kumar", text: "Exceptional quality work. The shed was completed ahead of schedule and within budget.", rating: 5 },
-  { name: "Priya Menon", text: "Very professional team. They understood our requirements perfectly and delivered beyond expectations.", rating: 5 },
-  { name: "Anil Thomas", text: "Best shed construction service in Kerala. Highly recommend their work to everyone.", rating: 5 },
-];
-
 function HomePage() {
+  const { t } = useLanguage();
+
+  const heroWords = t("home.hero").split(" ");
+
+  const featuredWorks = [
+    { img: residentialImg, title: "Residential Villa Shed", location: "Salem, Tamil Nadu" },
+    { img: commercialImg, title: "Industrial Warehouse", location: "Namakkal, Tamil Nadu" },
+    { img: customImg, title: "Custom Modern Design", location: "Erode, Tamil Nadu" },
+  ];
+
+  const testimonials = [
+    { name: "Rajesh Kumar", text: "Exceptional quality work. The shed was completed ahead of schedule and within budget.", rating: 5 },
+    { name: "Priya Devi", text: "Very professional team. They understood our requirements perfectly and delivered beyond expectations.", rating: 5 },
+    { name: "Anil Murugan", text: "Best shed construction service in Tamil Nadu. Highly recommend their work to everyone.", rating: 5 },
+  ];
+
   return (
     <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center">
         <div className="absolute inset-0">
-          <img src={heroImg} alt="Kerala shed construction" className="w-full h-full object-cover" width={1920} height={1080} />
+          <img src={heroImg} alt="Shed construction in Tamil Nadu" className="w-full h-full object-cover" width={1920} height={1080} />
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
         </div>
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center">
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
             {heroWords.map((word, i) => (
               <motion.span
-                key={i}
+                key={`${word}-${i}`}
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 + i * 0.12, duration: 0.6 }}
@@ -91,8 +94,7 @@ function HomePage() {
             transition={{ delay: 1.2, duration: 0.8 }}
             className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto"
           >
-            15+ years of expertise in crafting premium steel structures across Kerala.
-            From residential to industrial — we build it all.
+            {t("home.heroSub")}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -106,7 +108,7 @@ function HomePage() {
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground glow-gold transition-all"
               >
-                Get a Free Quote <ArrowRight size={16} />
+                {t("home.getQuote")} <ArrowRight size={16} />
               </motion.div>
             </Link>
             <Link to="/works">
@@ -115,7 +117,7 @@ function HomePage() {
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 rounded-lg border border-border px-8 py-4 text-sm font-semibold text-foreground hover:bg-secondary/50 transition-all"
               >
-                View Our Works
+                {t("home.viewWorks")}
               </motion.div>
             </Link>
           </motion.div>
@@ -138,11 +140,10 @@ function HomePage() {
 
       {/* Stats */}
       <section className="py-20 bg-card/30">
-        <div className="mx-auto max-w-5xl px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
-          <Counter target={500} label="Projects Done" />
-          <Counter target={15} label="Years Experience" />
-          <Counter target={450} label="Happy Clients" />
-          <Counter target={12} label="Awards Won" />
+        <div className="mx-auto max-w-5xl px-4 grid grid-cols-3 gap-8">
+          <Counter target={100} label={t("home.projectsDone")} />
+          <Counter target={10} label={t("home.yearsExp")} />
+          <Counter target={100} label={t("home.happyClients")} />
         </div>
       </section>
 
@@ -150,8 +151,8 @@ function HomePage() {
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-4">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-gold-gradient">Featured Works</h2>
-            <p className="mt-3 text-muted-foreground">A glimpse of our recent masterpieces</p>
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-gold-gradient">{t("home.featuredWorks")}</h2>
+            <p className="mt-3 text-muted-foreground">{t("home.featuredSub")}</p>
           </AnimatedSection>
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featuredWorks.map((work) => (
@@ -183,7 +184,7 @@ function HomePage() {
           <AnimatedSection delay={0.3} className="text-center mt-10">
             <Link to="/works">
               <motion.span whileHover={{ scale: 1.05 }} className="inline-flex items-center gap-2 text-primary font-medium hover:underline">
-                View All Projects <ArrowRight size={16} />
+                {t("home.viewAll")} <ArrowRight size={16} />
               </motion.span>
             </Link>
           </AnimatedSection>
@@ -194,22 +195,22 @@ function HomePage() {
       <section className="py-20 bg-card/30">
         <div className="mx-auto max-w-7xl px-4">
           <AnimatedSection className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-gold-gradient">What Clients Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-gold-gradient">{t("home.clientsSay")}</h2>
           </AnimatedSection>
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t) => (
-              <StaggerItem key={t.name}>
+            {testimonials.map((item) => (
+              <StaggerItem key={item.name}>
                 <motion.div
                   whileHover={{ y: -4 }}
                   className="rounded-xl border border-border bg-card p-6"
                 >
                   <div className="flex gap-1 mb-3">
-                    {Array.from({ length: t.rating }).map((_, i) => (
+                    {Array.from({ length: item.rating }).map((_, i) => (
                       <Star key={i} size={16} className="fill-primary text-primary" />
                     ))}
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed italic">"{t.text}"</p>
-                  <p className="mt-4 text-sm font-semibold text-foreground">{t.name}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed italic">&ldquo;{item.text}&rdquo;</p>
+                  <p className="mt-4 text-sm font-semibold text-foreground">{item.name}</p>
                 </motion.div>
               </StaggerItem>
             ))}
@@ -221,15 +222,15 @@ function HomePage() {
       <AnimatedSection>
         <section className="py-20">
           <div className="mx-auto max-w-3xl px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold font-display text-foreground">Ready to Build Your Dream Shed?</h2>
-            <p className="mt-4 text-muted-foreground">Get a free consultation and quote today. We'll bring your vision to life.</p>
+            <h2 className="text-3xl md:text-4xl font-bold font-display text-foreground">{t("home.ctaTitle")}</h2>
+            <p className="mt-4 text-muted-foreground">{t("home.ctaSub")}</p>
             <Link to="/contact">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
                 className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-sm font-semibold text-primary-foreground glow-gold"
               >
-                Contact Us Now <ArrowRight size={16} />
+                {t("home.contactNow")} <ArrowRight size={16} />
               </motion.div>
             </Link>
           </div>

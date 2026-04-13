@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { X } from "lucide-react";
+import { useLanguage } from "@/lib/i18n";
 import residentialImg from "@/assets/residential-shed.jpg";
 import commercialImg from "@/assets/commercial-shed.jpg";
 import customImg from "@/assets/custom-shed.jpg";
@@ -15,31 +16,38 @@ import heroImg from "@/assets/hero-shed.jpg";
 export const Route = createFileRoute("/works")({
   head: () => ({
     meta: [
-      { title: "Our Works — Kerala Shed Works" },
-      { name: "description", content: "Browse our portfolio of completed shed construction projects across Kerala." },
-      { property: "og:title", content: "Our Works — Kerala Shed Works" },
+      { title: "Our Works — Anand Constructions" },
+      { name: "description", content: "Browse our portfolio of completed shed construction projects across Tamil Nadu." },
+      { property: "og:title", content: "Our Works — Anand Constructions" },
       { property: "og:description", content: "Browse our portfolio of completed shed projects." },
     ],
   }),
   component: WorksPage,
 });
 
-const categories = ["All", "Residential", "Commercial", "Agricultural", "Custom"];
-
 const projects = [
-  { img: residentialImg, title: "Villa Car Parking Shed", category: "Residential", location: "Thrissur" },
-  { img: commercialImg, title: "Industrial Warehouse", category: "Commercial", location: "Ernakulam" },
-  { img: customImg, title: "Modern Glass Shed", category: "Custom", location: "Kozhikode" },
-  { img: renovationImg, title: "Warehouse Renovation", category: "Commercial", location: "Kannur" },
-  { img: gallery1, title: "Farm Equipment Shed", category: "Agricultural", location: "Palakkad" },
-  { img: gallery2, title: "Poultry Farm Shed", category: "Agricultural", location: "Malappuram" },
-  { img: gallery3, title: "Premium Car Port", category: "Residential", location: "Kochi" },
-  { img: heroImg, title: "Event Hall Structure", category: "Commercial", location: "Trivandrum" },
+  { img: residentialImg, title: "Villa Car Parking Shed", category: "Residential", location: "Salem" },
+  { img: commercialImg, title: "Industrial Warehouse", category: "Commercial", location: "Namakkal" },
+  { img: customImg, title: "Modern Glass Shed", category: "Custom", location: "Erode" },
+  { img: renovationImg, title: "Warehouse Renovation", category: "Commercial", location: "Karur" },
+  { img: gallery1, title: "Farm Equipment Shed", category: "Agricultural", location: "Dharmapuri" },
+  { img: gallery2, title: "Poultry Farm Shed", category: "Agricultural", location: "Tiruchengode" },
+  { img: gallery3, title: "Premium Car Port", category: "Residential", location: "Namakkal" },
+  { img: heroImg, title: "Event Hall Structure", category: "Commercial", location: "Coimbatore" },
 ];
 
 function WorksPage() {
   const [filter, setFilter] = useState("All");
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const { t } = useLanguage();
+
+  const categoryKeys = [
+    { value: "All", key: "works.all" as const },
+    { value: "Residential", key: "works.residential" as const },
+    { value: "Commercial", key: "works.commercial" as const },
+    { value: "Agricultural", key: "works.agricultural" as const },
+    { value: "Custom", key: "works.customCat" as const },
+  ];
 
   const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
@@ -52,36 +60,34 @@ function WorksPage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-6xl font-bold font-display text-gold-gradient"
           >
-            Our Works
+            {t("works.title")}
           </motion.h1>
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="mt-4 text-lg text-muted-foreground">
-            Every project tells a story of precision, quality, and trust.
+            {t("works.sub")}
           </motion.p>
         </div>
       </section>
 
       <section className="pb-20">
         <div className="mx-auto max-w-7xl px-4">
-          {/* Filter Tabs */}
           <AnimatedSection className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map((cat) => (
+            {categoryKeys.map((cat) => (
               <motion.button
-                key={cat}
+                key={cat.value}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setFilter(cat)}
+                onClick={() => setFilter(cat.value)}
                 className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
-                  filter === cat
+                  filter === cat.value
                     ? "bg-primary text-primary-foreground glow-gold"
                     : "bg-secondary text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {cat}
+                {t(cat.key)}
               </motion.button>
             ))}
           </AnimatedSection>
 
-          {/* Gallery Grid */}
           <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             <AnimatePresence mode="popLayout">
               {filtered.map((p) => (
@@ -101,7 +107,7 @@ function WorksPage() {
                   </div>
                   <div className="p-4">
                     <h3 className="text-sm font-semibold text-foreground">{p.title}</h3>
-                    <p className="text-xs text-muted-foreground mt-1">{p.location}, Kerala</p>
+                    <p className="text-xs text-muted-foreground mt-1">{p.location}, Tamil Nadu</p>
                   </div>
                 </motion.div>
               ))}
@@ -110,7 +116,6 @@ function WorksPage() {
         </div>
       </section>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {selectedImg && (
           <motion.div
