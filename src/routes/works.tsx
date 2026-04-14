@@ -4,14 +4,18 @@ import { useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { X } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
-import residentialImg from "@/assets/residential-shed.jpg";
 import commercialImg from "@/assets/commercial-shed.jpg";
 import customImg from "@/assets/custom-shed.jpg";
 import renovationImg from "@/assets/renovation-shed.jpg";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
 import heroImg from "@/assets/hero-shed.jpg";
+import residentialImg1 from "@/assets/works/residential/res.jpeg";
+import residentialImg2 from "@/assets/works/residential/res 3.jpeg";
+import residentialImg3 from "@/assets/works/residential/res 4.jpeg";
+import residentialImg4 from "@/assets/works/residential/residential.jpeg";
+import residentialImg5 from "@/assets/works/residential/residential (2).jpeg";
+import residentialImg6 from "@/assets/works/residential/custom and residential.jpeg";
 
 export const Route = createFileRoute("/works")({
   head: () => ({
@@ -26,13 +30,17 @@ export const Route = createFileRoute("/works")({
 });
 
 const projects = [
-  { img: residentialImg, title: "Villa Car Parking Shed", category: "Residential", location: "Salem" },
+  { img: residentialImg1, title: "Villa Car Parking Shed", category: "Residential", location: "Namakkal" },
+  { img: residentialImg2, title: "Covered Patio Roofing", category: "Residential", location: "Salem" },
+  { img: residentialImg3, title: "Traditional Roof Structure", category: "Residential", location: "Erode" },
+  { img: residentialImg4, title: "Premium Terrace Shade", category: "Residential", location: "Tiruchengode" },
+  { img: residentialImg5, title: "Decorative Home Roofing", category: "Residential", location: "Karur" },
+  { img: residentialImg6, title: "Custom Residential Roofing", category: "Residential", location: "Coimbatore" },
   { img: commercialImg, title: "Industrial Warehouse", category: "Commercial", location: "Namakkal" },
   { img: customImg, title: "Modern Glass Shed", category: "Custom", location: "Erode" },
   { img: renovationImg, title: "Warehouse Renovation", category: "Commercial", location: "Karur" },
   { img: gallery1, title: "Farm Equipment Shed", category: "Agricultural", location: "Dharmapuri" },
   { img: gallery2, title: "Poultry Farm Shed", category: "Agricultural", location: "Tiruchengode" },
-  { img: gallery3, title: "Premium Car Port", category: "Residential", location: "Namakkal" },
   { img: heroImg, title: "Event Hall Structure", category: "Commercial", location: "Coimbatore" },
 ];
 
