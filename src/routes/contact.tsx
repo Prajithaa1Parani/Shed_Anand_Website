@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Phone, Mail, MapPin, Send, MessageCircle, CheckCircle } from "lucide-react";
 import { useLanguage } from "@/lib/i18n";
+import { getSupabaseClient } from "@/lib/supabase";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -24,6 +25,8 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -33,9 +36,40 @@ function ContactPage() {
   });
   const { t } = useLanguage();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitError("");
+    setIsSubmitting(true);
+
+    try {
+      const supabase = getSupabaseClient();
+      const { error } = await supabase.from("queries").insert([
+        {
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          project_type: formData.projectType,
+          message: formData.message,
+        },
+      ]);
+
+      if (error) {
+        throw error;
+      }
+
+      setSubmitted(true);
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        projectType: "",
+        message: "",
+      });
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Failed to send your message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -84,6 +118,11 @@ function ContactPage() {
                   onSubmit={handleSubmit}
                   className="rounded-2xl border border-border bg-card p-8 space-y-6"
                 >
+                  {submitError ? (
+                    <p className="rounded-lg border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                      {submitError}
+                    </p>
+                  ) : null}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-foreground">{t("contact.name")}</Label>
@@ -153,8 +192,8 @@ function ContactPage() {
                     />
                   </div>
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 glow-gold">
-                      <Send size={16} /> {t("contact.send")}
+                    <Button type="submit" size="lg" disabled={isSubmitting} className="w-full bg-primary text-primary-foreground hover:bg-primary/90 glow-gold disabled:opacity-70">
+                      <Send size={16} /> {isSubmitting ? "Sending..." : t("contact.send")}
                     </Button>
                   </motion.div>
                 </motion.form>
@@ -196,7 +235,7 @@ function ContactPage() {
                 <MessageCircle size={20} /> {t("contact.whatsapp")}
               </motion.a>
 
-              <div className="rounded-2xl border border-border bg-card overflow-hidden aspect-[4/3]">
+              <div className="rounded-2xl border border-border bg-card overflow-hidden aspect-4/3">
                 <div className="w-full h-full bg-secondary/30 flex items-center justify-center">
                   <div className="text-center px-4">
                     <MapPin size={32} className="text-primary mx-auto mb-2" />
