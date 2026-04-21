@@ -37,9 +37,9 @@ export function Footer() {
                 <Phone size={14} className="text-primary" />
                 <span>7010058764</span>
               </a>
-              <a href="mailto:anand.constructions@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a href="mailto:prajithaa.sasikala@gmail.com" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Mail size={14} className="text-primary" />
-                <span>anand.constructions@gmail.com</span>
+                <span>prajithaa.sasikala@gmail.com</span>
               </a>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPin size={14} className="text-primary" />

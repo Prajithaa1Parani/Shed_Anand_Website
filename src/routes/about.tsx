@@ -17,10 +17,10 @@ export const Route = createFileRoute("/about")({
 });
 
 const milestones = [
-  { year: "2014", titleEn: "Founded", titleTa: "நிறுவப்பட்டது", descEn: "Started with a small team and a big dream in Namakkal", descTa: "நாமக்கல்லில் ஒரு சிறிய குழுவுடன் பெரிய கனவுடன் தொடங்கினோம்" },
-  { year: "2017", titleEn: "50th Project", titleTa: "50வது திட்டம்", descEn: "Completed our 50th project milestone", descTa: "எங்கள் 50வது திட்ட மைல்கல்லை நிறைவு செய்தோம்" },
-  { year: "2020", titleEn: "Expanded Across TN", titleTa: "தமிழ்நாடு முழுவதும் விரிவடைந்தது", descEn: "Extended services across all districts of Tamil Nadu", descTa: "தமிழ்நாட்டின் அனைத்து மாவட்டங்களிலும் சேவைகளை விரிவுபடுத்தினோம்" },
-  { year: "2023", titleEn: "100+ Projects", titleTa: "100+ திட்டங்கள்", descEn: "Crossed 100 projects with a growing reputation", descTa: "வளரும் நற்பெயருடன் 100 திட்டங்களை கடந்தோம்" },
+  { year: "2020", titleEn: "Founded", titleTa: "நிறுவப்பட்டது", descEn: "Started with a small team and a big dream in Namakkal", descTa: "நாமக்கல்லில் ஒரு சிறிய குழுவுடன் பெரிய கனவுடன் தொடங்கினோம்" },
+  { year: "2022", titleEn: "50th Project", titleTa: "50வது திட்டம்", descEn: "Completed our 50th project milestone", descTa: "எங்கள் 50வது திட்ட மைல்கல்லை நிறைவு செய்தோம்" },
+  { year: "2024", titleEn: "Expanded Across TN", titleTa: "தமிழ்நாடு முழுவதும் விரிவடைந்தது", descEn: "Extended services across all districts of Tamil Nadu", descTa: "தமிழ்நாட்டின் அனைத்து மாவட்டங்களிலும் சேவைகளை விரிவுபடுத்தினோம்" },
+  { year: "2026", titleEn: "100+ Projects", titleTa: "100+ திட்டங்கள்", descEn: "Crossed 100 projects with a growing reputation", descTa: "வளரும் நற்பெயருடன் 100 திட்டங்களை கடந்தோம்" },
 ];
 
 function AboutPage() {
@@ -59,7 +59,7 @@ function AboutPage() {
                 <p className="text-muted-foreground leading-relaxed">{t("about.founderP2")}</p>
                 <div className="grid grid-cols-2 gap-4 pt-4">
                   <div className="rounded-xl bg-secondary/50 p-4 text-center">
-                    <div className="text-2xl font-bold font-display text-gold-gradient">10+</div>
+                    <div className="text-2xl font-bold font-display text-gold-gradient">6+</div>
                     <p className="text-xs text-muted-foreground mt-1">{t("about.yearsExp")}</p>
                   </div>
                   <div className="rounded-xl bg-secondary/50 p-4 text-center">

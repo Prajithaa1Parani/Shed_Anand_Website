@@ -205,7 +205,7 @@ function ContactPage() {
                 <h3 className="text-lg font-bold font-display text-foreground">{t("contact.getInTouch")}</h3>
                 {[
                   { icon: Phone, label: t("contact.phoneLbl"), value: "7010058764", href: "tel:+917010058764" },
-                  { icon: Mail, label: t("contact.emailLbl"), value: "anand.constructions@gmail.com", href: "mailto:anand.constructions@gmail.com" },
+                  { icon: Mail, label: t("contact.emailLbl"), value: "prajithaa.sasikala@gmail.com", href: "mailto:prajithaa.sasikala@gmail.com" },
                   { icon: MapPin, label: t("contact.locationLbl"), value: "Namakkal, Tamil Nadu, India", href: undefined },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start gap-4">

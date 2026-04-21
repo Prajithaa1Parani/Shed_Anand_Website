@@ -83,8 +83,8 @@ const translations = {
   "about.sub": { en: "A legacy of quality construction, built on trust and dedication.", ta: "நம்பிக்கை மற்றும் அர்ப்பணிப்பின் மீது கட்டப்பட்ட தரமான கட்டுமான பாரம்பரியம்." },
   "about.founderTitle": { en: "The Man Behind the Work", ta: "பணிக்குப் பின்னால் உள்ள மனிதர்" },
   "about.founderP1": {
-    en: "With over 10 years of hands-on experience in steel shed construction, our founder has built a reputation for delivering exceptional quality across Tamil Nadu. What started as a small contracting business has grown into one of the most trusted names in shed construction.",
-    ta: "இரும்பு கொட்டகை கட்டுமானத்தில் 10+ ஆண்டுகள் நேரடி அனுபவத்துடன், எங்கள் நிறுவனர் தமிழ்நாடு முழுவதும் சிறந்த தரத்தை வழங்குவதில் நற்பெயரை பெற்றுள்ளார்.",
+    en: "With years of hands-on experience in steel shed construction, our founder has built a reputation for delivering exceptional quality across Tamil Nadu. What started as a small contracting business has grown into one of the most trusted names in shed construction.",
+    ta: "இரும்பு கொட்டகை கட்டுமானத்தில் பல ஆண்டுகள் நேரடி அனுபவத்துடன், எங்கள் நிறுவனர் தமிழ்நாடு முழுவதும் சிறந்த தரத்தை வழங்குவதில் நற்பெயரை பெற்றுள்ளார்.",
   },
   "about.founderP2": {
     en: "Every project is personally supervised to ensure the highest standards of craftsmanship, safety, and customer satisfaction. Our commitment to using premium materials and modern techniques sets us apart from the competition.",
