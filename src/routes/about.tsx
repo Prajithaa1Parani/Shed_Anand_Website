@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { useLanguage } from "@/lib/i18n";
-import founderImg from "@/assets/founder.jpg";
+import founderImg from "@/assets/fatherdounder.jpeg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
